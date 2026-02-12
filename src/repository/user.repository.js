@@ -11,7 +11,7 @@ const findUserByEmailRepository = async (email) => {
 }
 
 const getUsersRepository = async () => {
-    return await User.find()
+    return await User.findAll()
 }
 
 module.exports = {

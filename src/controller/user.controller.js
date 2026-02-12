@@ -1,4 +1,4 @@
-const { createUserService } = require("../service/user.service")
+const { createUserService, getUsersService } = require("../service/user.service")
 
 const createUserController = async (req, res) => {
     console.log("Inside createUserController")
@@ -10,8 +10,9 @@ const createUserController = async (req, res) => {
     res.status(201).json({ "message": "User created successfully", result })
 }
 
-const getUsersController = (req, res) => {
-    res.status(501).json({ "message": "All users" })
+const getUsersController = async (req, res) => {
+    const users = await getUsersService();
+    res.status(200).json({ "message": "All users", users })
 }
 
 
