@@ -4,5 +4,21 @@ const userRouter = require('./v1/user.router')
 
 
 router.use('/users', userRouter)
+// http://localhost:3001/api/v1/users
 
 module.exports = router
+
+
+//types of module import/export in js
+
+//commonjs
+// module.exports = router :default export
+// module.exports = {getUsersController, createUserController} :named export
+// import router from './router' :default import
+// import {getUsersController, createUserController} from './router' :named import
+
+//es module
+// export default router :default export
+// export {router} :named export
+// import router from './router' :default import
+// import {router} from './router' :named import
