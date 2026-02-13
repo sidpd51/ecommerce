@@ -13,13 +13,18 @@ const getUsersRepository = async () => {
 	return await User.findAll();
 };
 
-const findUserByIdService = async (id) => {
+const findUserByIdRepository = async (id) => {
 	return await User.findByPk(id);
+};
+
+const updateUserRepository = async (id, user) => {
+	return await User.update(user, { where: { id } });
 };
 
 module.exports = {
 	createUserRepository,
 	getUsersRepository,
 	findUserByEmailRepository,
-	findUserByIdService,
+	findUserByIdRepository,
+	updateUserRepository
 };

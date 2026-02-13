@@ -2,6 +2,7 @@ const {
 	createUserService,
 	getUsersService,
 	getUserByIdService,
+	updateUserService
 } = require("../service/user.service");
 
 const createUserController = async (req, res) => {
@@ -38,13 +39,15 @@ const getUserByIdController = async (req, res) => {
 };
 
 const updateUserController = async (req, res) => {
-	// task1: implement update user functionality 
-	// argument: id, req.body (name, email, password)
-	// requirements: 
-	// 1. user should be able to update name, email, password (anyone or all)
-	// 2. there should be check for email (if email is updated then check for email already exists)
-
-	res.status(501).json({ message: "Not implemented" })
+	const { id } = req.params;
+	const userData = req.body;
+	const result = await updateUserService(id, userData);
+	if (result === "User doesn't exists") {
+		return res
+			.status(400)
+			.json({ message: "User doesn't exists with this id" });
+	}
+	res.status(200).json({ message: "Successfully updated the user", result });
 }
 
 const deleteUserController = async (req, res) => {
