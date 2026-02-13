@@ -1,4 +1,4 @@
-const { createUserRepository, getUsersRepository, findUserByEmailRepository, findUserByIdRepository, updateUserRepository } = require('../repository/user.repository')
+const { createUserRepository, getUsersRepository, findUserByEmailRepository, findUserByIdRepository, updateUserRepository, deleteUserRepository } = require('../repository/user.repository')
 
 const createUserService = async (user) => {
     const userExists = await findUserByEmailRepository(user.email)
@@ -30,9 +30,20 @@ const updateUserService = async (id, user) => {
     return false
 }
 
+const deleteUserService = async (id) => {
+    const userExists = await findUserByIdRepository(id)
+    if (!userExists) {
+        return "User doesn't exists"
+    }
+    const deletedUser = await deleteUserRepository(id)
+    if (deletedUser) return true
+    return false
+}
+
 module.exports = {
     createUserService,
     getUsersService,
     getUserByIdService,
-    updateUserService
+    updateUserService,
+    deleteUserService
 }

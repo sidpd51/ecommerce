@@ -2,7 +2,8 @@ const {
 	createUserService,
 	getUsersService,
 	getUserByIdService,
-	updateUserService
+	updateUserService,
+	deleteUserService
 } = require("../service/user.service");
 
 const createUserController = async (req, res) => {
@@ -51,12 +52,14 @@ const updateUserController = async (req, res) => {
 }
 
 const deleteUserController = async (req, res) => {
-	// task2: implement delete user functionality 
-	// argument: id
-	// requirements: 
-	// 1. user should be able to delete user
-	// 2. there should be check for user exists
-	res.status(501).json({ message: "Not implemented" })
+	const { id } = req.params;
+	const result = await deleteUserService(id);
+	if (result === "User doesn't exists") {
+		return res
+			.status(400)
+			.json({ message: "User doesn't exists with this id" });
+	}
+	res.status(200).json({ message: "Successfully deleted the user", result });
 }
 
 module.exports = {

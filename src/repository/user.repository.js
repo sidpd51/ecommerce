@@ -21,10 +21,15 @@ const updateUserRepository = async (id, user) => {
 	return await User.update(user, { where: { id } });
 };
 
+const deleteUserRepository = async (id) => {
+	return await User.destroy({ where: { id } });
+};
+
 module.exports = {
 	createUserRepository,
 	getUsersRepository,
 	findUserByEmailRepository,
 	findUserByIdRepository,
-	updateUserRepository
+	updateUserRepository,
+	deleteUserRepository
 };
